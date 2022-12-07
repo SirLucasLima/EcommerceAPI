@@ -1,9 +1,9 @@
 //importar router de dentro do express
 const { Router } = require("express");
-const usersRoutes =  Router();
 const UsersController = require("../controllers/UsersController");
+const usersRoutes =  Router();
 
-//--------------- middleware ---------------//
+/*--------------- middleware ---------------/
 function myMiddleware(request, response, next){
     console.log('Você chamou o middleware');
 
@@ -16,11 +16,13 @@ function myMiddleware(request, response, next){
     //para chamar a próxima função "controller.create"
     next()
 }
+*/
 
- //--------------- instanciar class ---------------//
+//--------------- instanciar class ---------------//
 const usersController = new UsersController();
 
 //--------------- usersRoutes ---------------//
 usersRoutes.post("/", usersController.create);
+usersRoutes.put("/:id", usersController.update);
 
 module.exports = usersRoutes

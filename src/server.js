@@ -1,11 +1,14 @@
 const express = require("express");
 const AppError = require("./utils/AppError");
+const routes = require("./routes")
+const migrationsRun = require("./database/sqlite/migrations")
 
 const app = express();
 app.use(express.json());
 
-const routes = require("./routes")
 app.use(routes);
+
+migrationsRun();
 
 app.use(( error, request, response, next) => {
     //if a instancia do erro for do "AppError" (erro do cliente)
