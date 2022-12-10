@@ -1,3 +1,4 @@
+require("express-async-errors");
 const express = require("express");
 const AppError = require("./utils/AppError");
 const routes = require("./routes")
@@ -22,7 +23,7 @@ app.use(( error, request, response, next) => {
     //if o erro não for do cliente
     return response.status(500).json({
             status: "error",
-            message: "Internal server error."
+            message: `"Internal server error."${error}`
     })
 
     console.error(error);

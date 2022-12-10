@@ -37,17 +37,17 @@ class UsersController {
         //conexão com o DB
         const database = await sqliteConnection();
         //para selecionar a linha onde o id for o que estamos buscando 
-        const user = await database.get('SELECT * FROM users WHERE id = (?)', [id]);
+        const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]);
 
         if(!user) {
-            throw new AppError('User not found!');
+            throw new AppError("User not found!");
         }
 
-        const userWithUpdatedEmail = await database.get('SELECT * FROM users WHERE email = (?)', [email]);
+        const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
         //se o id do email for diferente do id do usuario, entao significa que o email ja esta em uso
         if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {
-            throw new AppError('This email is is not available.');
+            throw new AppError("This email is is not available.");
         }
 
         //se o email estiver disponivel, entao:
@@ -60,7 +60,7 @@ class UsersController {
             UPDATE users SET
             name = ?,
             email = ?,
-            updated_at = ?,
+            updated_at = ?
             WHERE id = ?`,
             [user.name, user.email, new Date(), id]
         )
