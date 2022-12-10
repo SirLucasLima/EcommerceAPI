@@ -51,10 +51,10 @@ class UsersController {
         }
 
         //se o email estiver disponivel, entao:
-        //nome do usuario seá = novo nome
-        user.name = name 
-        //email do usuario seá = novo email
-        user.email = email
+        //nome do usuario seá = novo nom se nao tiver conteudo dentro de novo nome, continua com o nome antigo
+        user.name = name ?? user.name
+        //email do usuario seá = novo email se nao tiver conteudo dentro de novo email, continua com o email antigo
+        user.email = email ?? user.email
 
         if(password && !old_password) {
             throw new AppError("Please, enter the current password to set a new one")
