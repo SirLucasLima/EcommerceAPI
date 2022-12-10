@@ -6,7 +6,7 @@
  * delete - DELETE para remover registro
  */
 
-const { hash } = require('bcryptjs')
+const { hash, compare } = require('bcryptjs')
 const AppError = require('../utils/AppError')
 const sqliteConnection = require('../database/sqlite')
 
@@ -31,7 +31,7 @@ class UsersController {
     }
 
     async update(request, response) {
-        const { name, email } = request.body;
+        const { name, email, password, old_password } = request.body;
         const { id } = request.params;
         
         //conexão com o DB
@@ -56,13 +56,30 @@ class UsersController {
         //email do usuario seá = novo email
         user.email = email
 
+        if(password && !old_password) {
+            throw new AppError("Please, enter the current password to set a new one")
+        }
+
+
+        //preciso importar o "compare" para conseguirmos comparar as senhas criptografadas
+        if(password && old_password) {
+            const checkOldPassword = await compare(old_password, user.password);
+
+            if(!checkOldPassword){
+                throw new AppError("The entered password is not correct")
+            }
+
+            user.password = await hash(password, 8);
+        }
+
         await database.run(`
             UPDATE users SET
             name = ?,
             email = ?,
-            updated_at = ?
+            password = ?,
+            updated_at = DATETIME('now')
             WHERE id = ?`,
-            [user.name, user.email, new Date(), id]
+            [user.name, user.email, user.password, new Date(), id]
         )
 
         return response.json();
