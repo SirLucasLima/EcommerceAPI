@@ -2,7 +2,7 @@ import { BlutStripes } from '@/components/BlurStripes'
 import { SignIn } from '@/components/SignIn'
 import { Hero } from '@/components/Hero'
 import { Copyright } from '@/components/Copyright'
-import { EmptyMemories } from '@/components/Emptymemories'
+import { EmptyMemories } from '@/components/EmptyMemories'
 
 export default function Home() {
   return (
