@@ -42,7 +42,7 @@ export default function NewMemory() {
         <textarea
           name="content"
           spellCheck={false}
-          className="w-full flex-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
+          className="w-full flex-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0 "
           placeholder="Feel free to add photos, videos, and narratives about this experience that you want to remember forever."
         />
       </form>
