@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { ChangeEvent, useState } from 'react'
 
 export function MediaPicker() {
@@ -15,7 +14,7 @@ export function MediaPicker() {
 
     const previewURL = URL.createObjectURL(files[0])
 
-    setPreview(previewURL)
+    SetPreview(previewURL)
   }
 
   return (
@@ -28,7 +27,8 @@ export function MediaPicker() {
       />
 
       {preview && (
-        <Image
+        // eslint-disable-next-line
+        <img
           src={preview}
           alt=""
           className="aspect-video w-full rounded-lg object-cover"
