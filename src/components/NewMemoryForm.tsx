@@ -2,12 +2,32 @@
 import { Camera } from 'lucide-react'
 import { MediaPicker } from './MediaPicker'
 import { FormEvent } from 'react'
+import { api } from '@/lib/api'
 
 export default function NewMemoryForm() {
-  function HandleCreateMemory(event: FormEvent<HTMLFormElement>) {
+  async function HandleCreateMemory(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
+
+    const fileToUpload = formData.get('coverUrl')
+
+    let coverUrl = ''
+
+    if (fileToUpload) {
+      const uploadFormData = new FormData()
+      uploadFormData.set('file', fileToUpload)
+
+      const uploadResponse = await api.post('/upload', uploadFormData)
+
+      coverUrl = uploadResponse.data.fileUrl
+    }
+
+    await api.post('/memories', {
+      coverUrl,
+      content: formData.get('content'),
+      isPublic: formData.get('isPublic'),
+    })
   }
 
   return (
