@@ -1,9 +1,17 @@
+'use client'
 import { Camera } from 'lucide-react'
 import { MediaPicker } from './MediaPicker'
+import { FormEvent } from 'react'
 
 export default function NewMemoryForm() {
+  function HandleCreateMemory(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+  }
+
   return (
-    <form className="flex flex-1 flex-col gap-2">
+    <form onSubmit={HandleCreateMemory} className="flex flex-1 flex-col gap-2">
       <div className="flex items-center gap-4">
         <label
           htmlFor="media"
@@ -36,6 +44,13 @@ export default function NewMemoryForm() {
         className="w-full flex-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0 "
         placeholder="Feel free to add photos, videos, and narratives about this experience that you want to remember forever."
       />
+
+      <button
+        type="submit"
+        className="inline-block self-end rounded-full bg-green-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black hover:bg-green-600"
+      >
+        Save
+      </button>
     </form>
   )
 }
