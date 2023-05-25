@@ -55,7 +55,7 @@ export function NewMemoryForm() {
           className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-200 hover:text-gray-100"
         >
           <Camera className="h-4 w-4" />
-          Anexar mídia
+          Add media
         </label>
 
         <label
@@ -69,7 +69,7 @@ export function NewMemoryForm() {
             value="true"
             className="h-4 w-4 rounded border-gray-400 bg-gray-700 text-purple-500"
           />
-          make the memory public
+          make this public
         </label>
       </div>
 
